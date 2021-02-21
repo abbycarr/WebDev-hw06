@@ -2,7 +2,7 @@ defmodule MultiBullWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "game:*", MultiBullWeb.RoomChannel
+  channel "game:*", MultiBullWeb.GameChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

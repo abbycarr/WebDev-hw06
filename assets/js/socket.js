@@ -16,6 +16,7 @@ let state = {
 let callback = null;
 
 // The server sent us a new state.
+// these functions based on socket.js file from lecture 
 function state_update(st) {
   console.log("New state", st);
   state = st;
@@ -43,6 +44,14 @@ export function ch_reset() {
     .receive("error", resp => {
       console.log("Unable to push", resp)
     });
+}
+
+export function ch_login(name) {
+  channel.push("login", {name: name})
+          .receive("ok", state_update)
+          .receive("error", resp => {
+            console.log("cannot login", resp)
+          });
 }
 
 channel.join()
