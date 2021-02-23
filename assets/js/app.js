@@ -73,7 +73,7 @@ function Controls({ guess, reset }) {
 
 
   function go_guess() {
-    if (test_guess(text)) { // FIXME game logic in js oops
+    if (test_guess(text)) {
       guess(text);
     }
   }
@@ -103,112 +103,91 @@ function Controls({ guess, reset }) {
   );
 }
 
-function Play({ state }) {
+function Guesses({ state }) {
 
   let { guesses, results, name } = state;
 
+  const items = []
+
+  for (let i = 0; i < guesses.length; i++) {
+    items.push(
+      <tr>
+        <td data-label="Count">{i + 1}</td>
+        <td data-label="Guess">{guesses[i]}</td>
+        <td data-label="Result">{results[i]}</td>
+      </tr>)
+  }
+
+  let body = (
+    <table max-height="800px">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Guess</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>{items}</tbody>
+    </table>
+  );
+
+  return (
+    <div>
+      {body}
+    </div>
+  )
+
+}
+
+
+function Play({state}) {
+
+          let {guesses, results, name} = state;
+
   function guess(text) {
-    ch_push({ letter: text });
+          ch_push({ letter: text });
   }
 
   return (
     <div>
       <Controls reset={reset} guess={guess} />
-      <table max-height="800px">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Guess</th>
-            <th>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Count">1</td>
-            <td data-label="Guess">{guesses[0]}</td>
-            <td data-label="Result">{results[0]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">2</td>
-            <td data-label="Guess">{guesses[1]}</td>
-            <td data-label="Result">{results[1]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">3</td>
-            <td data-label="Guess">{guesses[2]}</td>
-            <td data-label="Result">{results[2]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">4</td>
-            <td data-label="Guess">{guesses[3]}</td>
-            <td data-label="Result">{results[3]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">5</td>
-            <td data-label="Guess">{guesses[4]}</td>
-            <td data-label="Result">{results[4]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">6</td>
-            <td data-label="Guess">{guesses[5]}</td>
-            <td data-label="Result">{results[5]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">7</td>
-            <td data-label="Guess">{guesses[6]}</td>
-            <td data-label="Result">{results[6]}</td>
-          </tr>
-          <tr>
-            <td data-label="Count">8</td>
-            <td data-label="Guess">{guesses[7]}</td>
-            <td data-label="Result">{results[7]}</td>
-          </tr>
-        </tbody>
-      </table>
+      <Guesses state={state} />
       <button onClick={reset}>New Game</button>
     </div>
   )
-
-
-
 }
 
 function App() {
 
   const [state, setState] = useState({
-    name: "",
+          name: "",
     guesses: [],
     results: [],
   })
 
   // this function is from lecture
   useEffect(() => {
-    ch_join(setState);
+          ch_join(setState);
   });
 
 
-  let turns = 8 - guesses.length;
 
-
-  let body = null;
+  let body = (<div><p>boo</p></div>);
 
   if (state.name === "") {
-    body = <Login />;
+          body = <Login />;
   }
-  else if (results[results.length - 1] == "4B0C") {
-    body = <GameWon reset={(reset)} />;
-  }
-  else if (turns > 0) {
-    body = <Play state={state} />;
+  else if (state.results[state.results.length - 1] == "4B0C") {
+          body = <GameWon reset={(reset)} />;
   }
   else {
-    body = <GameLost reset={reset} />;
+          body = <Play state={state} />;
   }
 
   return (
     <div className="container">
-      {body}
-    </div>
+          {body}
+        </div>
   );
 }
 
@@ -218,23 +197,23 @@ function Login() {
 
   return (
     <div className="row">
-      <div className="column">
-        <input type="text"
-          value={name}
-          onChange={(ev) => setName(ev.target.value)} />
-      </div>
-      <div className="column">
-        <button onClick={() => ch_login(name)}>
-          Login to game
+          <div className="column">
+            <input type="text"
+              value={name}
+              onChange={(ev) => setName(ev.target.value)} />
+          </div>
+          <div className="column">
+            <button onClick={() => ch_login(name)}>
+              Login to game
         </button>
-      </div>
-    </div>
+          </div>
+        </div>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+          <App />
+        </React.StrictMode>,
   document.getElementById('root')
 );

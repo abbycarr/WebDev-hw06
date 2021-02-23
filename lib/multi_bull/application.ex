@@ -16,6 +16,7 @@ defmodule MultiBull.Application do
       # Start a worker by calling: MultiBull.Worker.start_link(arg)
       # {MultiBull.Worker, arg}
       MultiBull.BackupAgent,
+      MultiBull.GameSup,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

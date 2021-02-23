@@ -1,5 +1,5 @@
 defmodule MultiBull.Game do
-  
+
   def new do
     %{
       secret: random_num(),
@@ -9,21 +9,22 @@ defmodule MultiBull.Game do
   end
 
   def guess(state, letter) do
-    %{ 
+    %{
       state | guesses: MapSet.put(state.guesses, letter)
     }
   end
 
   def result(state, letter) do
-    %{ 
+    %{
       state | results: MapSet.put(state.results, letter)
     }
   end
 
-  def view(state) do
+  def view(state, name) do
     %{
       guesses: MapSet.to_list(state.guesses),
-      results: MapSet.to_list(state.results)
+      results: MapSet.to_list(state.results),
+      name: name,
     }
   end
 

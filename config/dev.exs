@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :multi_bull, MultiBullWeb.Endpoint,
-  http: [port: 4000], # FIXME
+  http: [port: 4000], # okay
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
