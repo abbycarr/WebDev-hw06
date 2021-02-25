@@ -10,6 +10,7 @@ defmodule MultiBullWeb.GameChannel do
   @impl true
   def join("game:" <> name, payload, socket) do
     if authorized?(payload) do
+      # IO.puts name
       GameServer.start(name)
       socket = socket
       |> assign(:name, name)

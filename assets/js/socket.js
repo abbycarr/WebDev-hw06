@@ -6,9 +6,10 @@ let socket = new Socket(
 );
 socket.connect();
 
-let channel = socket.channel("game:1", {});
+let channel = socket.channel("game:flower", {});
 
 let state = {
+  room: "",
   name: "",
   guesses: [],
   results: [],
@@ -47,7 +48,7 @@ export function ch_reset() {
     });
 }
 
-export function ch_login(name) {
+export function ch_login(name, room) {
   channel.push("login", {name: name})
           .receive("ok", state_update)
           .receive("error", resp => {

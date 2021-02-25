@@ -62,7 +62,7 @@ function Controls({ guess, reset }) {
   // the text useState item is from lecture
   const [text, setText] = useState("");
 
-  // the following 3 lines of code are from lecture
+  // the following 4 lines of code are from lecture
   function updateText(ev) {
     let vv = ev.target.value;
     let cc = vv[vv.length - 1];
@@ -76,6 +76,7 @@ function Controls({ guess, reset }) {
     if (test_guess(text)) {
       guess(text);
     }
+    setText("");
   }
 
   function keyPress(ev) {
@@ -105,7 +106,7 @@ function Controls({ guess, reset }) {
 
 function Guesses({ state }) {
 
-  let { guesses, results, name } = state;
+  let { guesses, results, name, room } = state;
 
   const items = []
 
@@ -140,12 +141,12 @@ function Guesses({ state }) {
 }
 
 
-function Play({state}) {
+function Play({ state }) {
 
-          let {guesses, results, name} = state;
+  let { guesses, results, name, room } = state;
 
   function guess(text) {
-          ch_push({ letter: text });
+    ch_push({ letter: text });
   }
 
   return (
@@ -160,14 +161,15 @@ function Play({state}) {
 function App() {
 
   const [state, setState] = useState({
-          name: "",
+    room: "",
+    name: "",
     guesses: [],
     results: [],
   })
 
   // this function is from lecture
   useEffect(() => {
-          ch_join(setState);
+    ch_join(setState);
   });
 
 
@@ -175,45 +177,55 @@ function App() {
   let body = (<div><p>boo</p></div>);
 
   if (state.name === "") {
-          body = <Login />;
+    body = <Login />;
   }
   else if (state.results[state.results.length - 1] == "4B0C") {
-          body = <GameWon reset={(reset)} />;
+    body = <GameWon reset={(reset)} />;
   }
   else {
-          body = <Play state={state} />;
+    body = <Play state={state} />;
   }
 
   return (
     <div className="container">
-          {body}
-        </div>
+      {body}
+    </div>
   );
 }
 
 //login function based on login function used in class
 function Login() {
   const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
 
   return (
     <div className="row">
+      <div className="column">
+        <div className="row">
           <div className="column">
-            <input type="text"
+            <input type="text" placeholder="enter game name"
+              value={gameName}
+              onChange={(ev) => setRoom(ev.target.value)} />
+          </div>
+          <div className="column">
+            <input type="text" placeholder="enter username"
               value={name}
               onChange={(ev) => setName(ev.target.value)} />
           </div>
-          <div className="column">
-            <button onClick={() => ch_login(name)}>
-              Login to game
-        </button>
-          </div>
         </div>
+      </div>
+      <div className="column">
+        <button onClick={() => ch_login(name, room)}>
+          Ready
+        </button>
+      </div>
+    </div>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-          <App />
-        </React.StrictMode>,
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );

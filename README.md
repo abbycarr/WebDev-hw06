@@ -17,3 +17,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+Code for multiplayer functionality based on code from Nat Tuck's lecture,
+found at https://github.com/NatTuck/scratch-2021-01.git
