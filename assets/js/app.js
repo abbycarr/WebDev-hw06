@@ -115,6 +115,7 @@ function Guesses({ state }) {
     items.push(
       <tr>
         <td data-label="Count">{i + 1}</td>
+        <td data-label="User">{name}</td>
         <td data-label="Guess">{guesses[i]}</td>
         <td data-label="Result">{results[i]}</td>
       </tr>)
@@ -125,6 +126,7 @@ function Guesses({ state }) {
       <thead>
         <tr>
           <th></th>
+          <th>Player</th>
           <th>Guess</th>
           <th>Result</th>
         </tr>

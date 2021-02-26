@@ -66,7 +66,7 @@ defmodule MultiBull.GameServer do
 
   def handle_info(:pook, game) do
     MultiBullWeb.Endpoint.broadcast!(
-      "game:1", # FIXME: Game name should be in state
+      "game:1", 
       "view",
       Game.view(game, ""))
     {:noreply, game}
