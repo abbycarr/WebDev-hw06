@@ -71,7 +71,6 @@ function Controls({ guess, reset }) {
     }
   }
 
-
   function go_guess() {
     if (test_guess(text)) {
       guess(text);
@@ -85,8 +84,14 @@ function Controls({ guess, reset }) {
     }
   }
 
+  function exit() {
+    state.name = "";
+    return App();
+  }
+
   return (
     <div className="App">
+      <button class="secondary" onClick={exit}>EXIT</button>
       <h1>Bulls and Cows</h1>
       <p>Guess the four-digit number. More information on the game&nbsp;
        <a href="https://en.wikipedia.org/wiki/Bulls_and_Cows" rel="noreferrer" target="_blank">here</a>
@@ -174,7 +179,7 @@ function App() {
 
 
 
-  let body = (<div><p>boo</p></div>);
+  let body = null;
 
   if (state.name === "") {
     body = <Login />;
