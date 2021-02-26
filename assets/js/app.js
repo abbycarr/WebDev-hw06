@@ -204,7 +204,7 @@ function Login() {
         <div className="row">
           <div className="column">
             <input type="text" placeholder="enter game name"
-              value={gameName}
+              value={room}
               onChange={(ev) => setRoom(ev.target.value)} />
           </div>
           <div className="column">
