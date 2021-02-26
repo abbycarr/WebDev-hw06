@@ -84,14 +84,10 @@ function Controls({ guess, reset }) {
     }
   }
 
-  function exit() {
-    state.name = "";
-    return App();
-  }
 
   return (
     <div className="App">
-      <button class="secondary" onClick={exit}>EXIT</button>
+      <button class="secondary" onClick={() => ch_login("", "")}>EXIT</button>
       <h1>Bulls and Cows</h1>
       <p>Guess the four-digit number. More information on the game&nbsp;
        <a href="https://en.wikipedia.org/wiki/Bulls_and_Cows" rel="noreferrer" target="_blank">here</a>
@@ -217,6 +213,27 @@ function Login() {
               value={name}
               onChange={(ev) => setName(ev.target.value)} />
           </div>
+        </div>
+      </div>
+      <div className="column">
+        <button onClick={() => ch_login(name, room)} >
+          Ready
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Waiting({ name, room }) {
+
+  return (
+    <div className="row">
+      <div className="column">
+        <div className="row">
+          <label>
+            <Checkbox/>
+            <span>Check to become an Observer!</span>
+          </label>
         </div>
       </div>
       <div className="column">
