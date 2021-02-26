@@ -6,7 +6,7 @@ let socket = new Socket(
 );
 socket.connect();
 
-let channel = socket.channel("game:flower", {});
+let channel = socket.channel("game:1", {});
 
 let state = {
   room: "",
