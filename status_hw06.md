@@ -11,10 +11,10 @@ hw06.clipturtle.com
 sockets, multiple room, lots of the pheonix and elixir logic
 
 4. What part of your application state is on the server?
-
+All
 
 5. What part of your application state, if any, is in the browser?
-
+None
 
 And here's a list of tasks for grading comments. Just leave this here:
  - Task 1
